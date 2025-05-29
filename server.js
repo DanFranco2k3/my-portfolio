@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'frontend'))); // Serve static files
 
 // Serve front.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'front.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
 // Handle form submission
