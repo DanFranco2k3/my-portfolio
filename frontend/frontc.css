@@ -612,28 +612,6 @@ footer {
 
 
 
-
-/* responsiveness */
-
-/* @media(max-width: 768px) {
-    .container {
-        width: 100%;
-        flex-direction: column;
-        padding: 0.625rem;
-        border: 0.0625rem solid white;
-        border-radius: 0.1875rem;
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
-    }
-    .portfolio-description {
-        font-size: 1rem;
-        padding: 0.625rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center; 
-    }
-} */
-
 @media (max-width: 375px) {
     .container {
         width: 100%;
