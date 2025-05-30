@@ -216,6 +216,22 @@ body {
   color: white;
 }
 
+.download-btn {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .download-btn:hover {
+        background: #45a049;
+    }
+
 .contact {
   display: flex;
   flex-direction: column;
