@@ -6,8 +6,12 @@
 
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('frontend/pics_file/bodywork-demo/BodyworkDEMO.otf') format('opentype');
+  src: url('frontend/pics_file/bodywork-demo/BodyworkDEMO.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
+
 
 
 body {
