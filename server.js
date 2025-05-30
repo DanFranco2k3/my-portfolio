@@ -25,7 +25,7 @@ const Message = mongoose.model('Message', messageSchema);
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname))); // Serve static files
+app.use(express.static(path.join(__dirname, 'frontend'))); // Serve static files
 
 // Serve front.html
 app.get('/', (req, res) => {
