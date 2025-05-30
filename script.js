@@ -1,43 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const OFFSET = 80; // Adjust this if you have a fixed header
+  const OFFSET = 100; // Adjust based on any fixed header you might have
 
-  // Select ALL anchor links that start with # (hash links)
-  const navLinks = document.querySelectorAll('a[href^="#"]');
+  // Target your specific nav links with the nav-link class
+  const navLinks = document.querySelectorAll('.nav-link');
   
-  console.log('Found navigation links:', navLinks.length); // Debug line
+  console.log('Found navigation links:', navLinks.length); // Should show 3
   
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
+      e.preventDefault(); // Prevent default jump behavior
       
-      // Skip empty href or just "#"
+      const href = link.getAttribute('href');
+      console.log('Clicked link href:', href); // Debug
+      
       if (!href || href === '#') return;
       
-      e.preventDefault();
-      
-      const targetId = href.substring(1); // Remove the #
+      const targetId = href.substring(1); // Remove the # symbol
       const targetElement = document.getElementById(targetId);
-
-      console.log('Clicking link to:', targetId); // Debug line
-      console.log('Target element found:', !!targetElement); // Debug line
+      
+      console.log('Looking for element with ID:', targetId); // Debug
+      console.log('Target element found:', !!targetElement); // Debug
 
       if (targetElement) {
+        // Get the element's position from top of page
         const elementPosition = targetElement.offsetTop - OFFSET;
         
-        console.log('Scrolling to position:', elementPosition); // Debug line
+        console.log('Element position:', targetElement.offsetTop);
+        console.log('Scrolling to position:', elementPosition);
         
+        // Smooth scroll to the target
         window.scrollTo({
           top: elementPosition,
           behavior: 'smooth'
         });
+        
+        // Alternative method if the above doesn't work
+        // targetElement.scrollIntoView({ 
+        //   behavior: 'smooth', 
+        //   block: 'start' 
+        // });
+        
       } else {
-        console.warn('Target element not found:', targetId);
+        console.error('Could not find element with ID:', targetId);
       }
     });
   
 
-  // Alternative method using CSS scroll-behavior (fallback)
+  // Backup: Add CSS smooth scrolling to html element
   document.documentElement.style.scrollBehavior = 'smooth';
+  
+  console.log('Smooth scroll script loaded successfully');
 });
 
   // Form submission
