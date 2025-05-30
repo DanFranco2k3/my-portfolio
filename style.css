@@ -9,7 +9,7 @@ body {
 }
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('pics_file/bodywork-demo/BodyworkDEMO.otf') format('truetype'); /* Use 'opentype' for .otf, or 'woff' for .woff */
+  src: url('my-portflio/pics_file/bodywork-demo/BodyworkDEMO.otf') format('truetype'); /* Use 'opentype' for .otf, or 'woff' for .woff */
   font-weight: normal;
   font-style: normal;
 
