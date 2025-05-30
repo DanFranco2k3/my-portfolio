@@ -6,7 +6,10 @@ const path = require('path');
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/portfolio')
+mongoose.connect('mongodb://localhost:27017/portfolio', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
     console.log('✅ Connected to MongoDB');
   })
@@ -25,9 +28,11 @@ const Message = mongoose.model('Message', messageSchema);
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'frontend'))); // Serve static files
 
-// Serve front.html
+// Serve static files from frontend folder
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+// Serve the index.html from the root directory
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
