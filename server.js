@@ -2,11 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+require('dotenv').config(); // Load .env file
 
 const app = express();
 
-// ✅ Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/portfolio', {
+// ✅ Use MONGODB_URI from .env or fallback to local
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/portfolio';
+
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -25,16 +28,16 @@ const Message = mongoose.model('Message', messageSchema);
 // ✅ Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ✅ Serve static files (CSS, JS, fonts, images)
-app.use(express.static(__dirname)); // root (index.html, style.css, script.js)
-app.use('/frontend', express.static(path.join(__dirname, 'frontend'))); // serve frontend/pics_file/...
+// ✅ Serve static files (CSS, JS, images, fonts)
+app.use(express.static(__dirname));
+app.use('/frontend', express.static(path.join(__dirname, 'frontend')));
 
 // ✅ Serve index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// ✅ Form submission handler
+// ✅ Form submission route
 app.post('/submit', async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -47,8 +50,18 @@ app.post('/submit', async (req, res) => {
   }
 });
 
+// ✅ Optional: test-db route
+app.get('/test-db', async (req, res) => {
+  try {
+    const messages = await Message.find();
+    res.send(`✅ MongoDB is working. ${messages.length} message(s) found.`);
+  } catch (error) {
+    res.status(500).send('❌ MongoDB query failed: ' + error.message);
+  }
+});
+
 // ✅ Start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
