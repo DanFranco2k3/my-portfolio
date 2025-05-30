@@ -6,10 +6,9 @@
 
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('pics_file/bodywork-demo/BodyworkDEMO.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+  src: url('frontend/pics_file/bodywork-demo/BodyworkDEMO.otf') format('opentype');
 }
+
 
 body {
   font-family: 'MyCustomFont', sans-serif;
