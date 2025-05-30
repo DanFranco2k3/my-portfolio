@@ -5,19 +5,15 @@ const path = require('path');
 
 const app = express();
 
-// Connect to MongoDB
+// ✅ Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/portfolio', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => {
-    console.log('✅ Connected to MongoDB');
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err);
-  });
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
 
-// Mongoose Schema and Model
+// ✅ Define Mongoose schema
 const messageSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -26,18 +22,19 @@ const messageSchema = new mongoose.Schema({
 
 const Message = mongoose.model('Message', messageSchema);
 
-// Middleware
+// ✅ Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from frontend folder
-app.use(express.static(path.join(__dirname, 'frontend')));
+// ✅ Serve static files (CSS, JS, fonts, images)
+app.use(express.static(__dirname)); // root (index.html, style.css, script.js)
+app.use('/frontend', express.static(path.join(__dirname, 'frontend'))); // serve frontend/pics_file/...
 
-// Serve the index.html from the root directory
+// ✅ Serve index.html
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Handle form submission
+// ✅ Form submission handler
 app.post('/submit', async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -45,12 +42,12 @@ app.post('/submit', async (req, res) => {
     await newMessage.save();
     res.send('<script>alert("Message received! Thanks!"); window.location.href="/";</script>');
   } catch (error) {
-    console.error('Error saving message:', error);
+    console.error('❌ Error saving message:', error);
     res.status(500).send('Error saving message.');
   }
 });
 
-// Start server
+// ✅ Start server
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
